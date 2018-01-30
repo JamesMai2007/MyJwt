@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="AuthServer:war">
+    <output-path>$PROJECT_DIR$/AuthServer/target</output-path>
+    <root id="archive" name="AuthServer.war">
+      <element id="artifact" artifact-name="AuthServer:war exploded" />
+    </root>
+  </artifact>
+</component>
