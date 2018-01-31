@@ -2,13 +2,10 @@ package com.jm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
 
 
-@SpringBootApplication()
-@ComponentScan("com.jm")
-public class MainApplication extends SpringBootServletInitializer {
+@SpringBootApplication
+public class MainApplication  {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MainApplication.class, args);
@@ -16,6 +13,6 @@ public class MainApplication extends SpringBootServletInitializer {
 
 	/*@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(JwtApplication.class);
+		return application.sources(MainApplication.class);
 	}*/
 }

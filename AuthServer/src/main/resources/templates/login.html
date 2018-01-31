@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+</head>
+<body>
+<div id="loginEL">
+    Username:&nbsp;<input type="text" v-model="username" /><br/>
+    Password:&nbsp;<input type="password" v-model="password" />
+    <button v-on:click="">登录</button>
+</div>
+<script>
+    new Vue({
+        el: "#loginEL",
+        data:{
+            username:'admin',
+            password:'admin'
+        }
+
+    });
+</script>
+</body>
+</html>

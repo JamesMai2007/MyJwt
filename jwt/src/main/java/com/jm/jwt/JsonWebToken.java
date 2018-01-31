@@ -5,26 +5,22 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Map;
 
 /**
  * jwt工具类
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2017/9/21 22:21
  */
-@ConfigurationProperties(prefix = "jm.jwt")
-@Component
+//@ConfigurationProperties(prefix = "jm.jwt")
+//@Component
 public class JsonWebToken {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private String secret;
     private long expire;
     private String header;
+
 
     /**
      * 生成jwt token

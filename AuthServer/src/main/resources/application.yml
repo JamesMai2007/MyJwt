@@ -1,5 +1,10 @@
+jm:
+   jwt:
+      secret: 3857348957348957348957893457938457983475
+      expire: 120 #秒
+      header: token
+server:
+  port: 9000
 spring:
-     mvc:
-        view:
-           prefix: /WEB-INF/jsp/
-           suffix: .jsp
+  thymeleaf:
+    cache: false
