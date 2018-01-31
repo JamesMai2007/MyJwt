@@ -35,7 +35,7 @@ public class LoginController {
             List<String> roles = new ArrayList<String>();
             roles.add("admin");
             List<String> perms = new ArrayList<String>();
-            roles.add("sys:user:*");
+            perms.add("sys:user:*");
 
             params.put("roles" , roles);
             params.put("perms" , perms);

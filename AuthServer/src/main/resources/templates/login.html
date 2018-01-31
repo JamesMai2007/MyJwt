@@ -2,19 +2,42 @@
 <head>
     <title>Title</title>
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div id="loginEL">
     Username:&nbsp;<input type="text" v-model="username" /><br/>
-    Password:&nbsp;<input type="password" v-model="password" />
-    <button v-on:click="">登录</button>
+    Password:&nbsp;<input type="password" v-model="password" /><br/>
+    <button v-on:click="login">登录</button>
 </div>
 <script>
-    new Vue({
+  var vue = new Vue({
         el: "#loginEL",
         data:{
             username:'admin',
             password:'admin'
+        },
+        methods:{
+            login: function(event){
+                $.ajax({
+                    type : "POST",
+                    url : "/login",
+                    data : {
+                        username : vue.username,
+                        password : vue.password,
+                    },
+                    success : function(data) {
+                        // if(data.code == 0)
+                            alert(data.msg)
+                        localStorage.setItem("")
+
+                    },
+                    error : function(){
+                        alert("错误");
+                    }
+
+                });
+            }
         }
 
     });
