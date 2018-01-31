@@ -40,8 +40,10 @@ public class LoginController {
             params.put("roles" , roles);
             params.put("perms" , perms);
 
+            String token = jsonWebToken.generateToken(1L, params);
+            response.setHeader("Authorization","Basic "+token);
 
-            return R.ok(jsonWebToken.generateToken(1L, params));
+            return R.ok();
         }
 
 

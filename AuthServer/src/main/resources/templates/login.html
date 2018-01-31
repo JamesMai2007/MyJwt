@@ -27,9 +27,10 @@
                         password : vue.password,
                     },
                     success : function(data) {
-                        // if(data.code == 0)
-                            alert(data.msg)
-                        localStorage.setItem("")
+                         if(data.code == 0)
+                                 location.href = "index.html";
+                         //   alert(data.msg)
+                        //localStorage.setItem("")
 
                     },
                     error : function(){

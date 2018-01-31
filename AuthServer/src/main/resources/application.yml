@@ -2,7 +2,7 @@ jm:
    jwt:
       secret: 3857348957348957348957893457938457983475
       expire: 120 #秒
-      header: token
+      header: Authorization
 server:
   port: 9000
 spring:
