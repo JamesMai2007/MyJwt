@@ -1,8 +1,10 @@
 package com.jm.authserver.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.jm.authserver.toolkit.R;
 import com.jm.jwt.JsonWebToken;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class LoginController {
 
     @ResponseBody
     @PostMapping(value = {"/login"})
-    public Object login(Model model ,  String username , String password , HttpServletRequest request , HttpServletResponse response){
+    public Object login(Model model , String backurl ,  String username , String password , HttpServletRequest request , HttpServletResponse response){
         System.out.println("============= login");
 
         if("admin".equals(username) && "admin".equals(password)){
@@ -37,12 +39,16 @@ public class LoginController {
             List<String> perms = new ArrayList<String>();
             perms.add("sys:user:*");
 
-            params.put("roles" , roles);
-            params.put("perms" , perms);
+        params.put("roles" , roles);
+        params.put("perms" , perms);
 
-
-            return R.ok(jsonWebToken.generateToken(1L, params));
-        }
+        String token = jsonWebToken.generateToken("1", params);
+        //response.setHeader("Authorization","Basic "+token);
+        Map<String,Object> result = new HashMap<>();
+        result.put("token" , token);
+        result.put("msg" , "登录成功");
+        return R.ok(result);
+    }
 
 
 
@@ -64,5 +70,15 @@ public class LoginController {
     public String error(HttpServletRequest request){
         System.out.println("============= error");
         return "login";
+    }
+
+    @ResponseBody
+    @GetMapping("/protected")
+    public R viewProtected(HttpServletRequest request){
+        Claims claims = (Claims)request.getAttribute("claims");
+
+        System.out.println("============= protected !!!!");
+        System.out.println("============= "+ JSON.toJSONString(claims));
+        return R.ok("请求成功: "+JSON.toJSONString(claims));
     }
 }

@@ -12,8 +12,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="AuthServer" target="1.8" />
-      <module name="jwt" target="1.5" />
-      <module name="MyJwt" target="1.5" />
+      <module name="jwt" target="1.8" />
+      <module name="MyJwt" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

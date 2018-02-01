@@ -1,4 +1,4 @@
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <title>Title</title>
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
@@ -9,13 +9,18 @@
     Username:&nbsp;<input type="text" v-model="username" /><br/>
     Password:&nbsp;<input type="password" v-model="password" /><br/>
     <button v-on:click="login">登录</button>
+    <br/><br/>
+    <div>{{message}}</div>
+    <button v-on:click="request">请求保护资源</button>
+
 </div>
 <script>
   var vue = new Vue({
         el: "#loginEL",
         data:{
             username:'admin',
-            password:'admin'
+            password:'admin',
+            message: ''
         },
         methods:{
             login: function(event){
@@ -27,9 +32,13 @@
                         password : vue.password,
                     },
                     success : function(data) {
-                        // if(data.code == 0)
-                            alert(data.msg)
-                        localStorage.setItem("")
+                         if(data.code == 0){
+
+
+                             vue.message = data.msg;
+                             localStorage.setItem("token" , data.token);
+                             //location.href = "index.html";
+                         }
 
                     },
                     error : function(){
@@ -38,6 +47,34 @@
 
                 });
             }
+            ,
+            request: function(event){
+                var token = localStorage.getItem("token");
+                if(token)
+                    $.ajax({
+                        type : "GET",
+                        url : "/protected",
+                        data : {
+                            token : token
+                        },
+                        success : function(data) {
+                            if(data.code == 0){
+                                vue.message = data.msg;
+                            }
+
+                        },
+                        error : function(event){
+                            if(event.status == 401)
+                                vue.message = "token超时，请重新登录";
+                            else
+                                alert("错误"+JSON.stringify(event));
+                        }
+
+                    });
+                else
+                    vue.message = "Please login!";
+            }
+
         }
 
     });

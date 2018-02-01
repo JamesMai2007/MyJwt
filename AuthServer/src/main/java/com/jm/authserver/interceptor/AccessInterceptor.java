@@ -29,11 +29,12 @@ public class AccessInterceptor implements HandlerInterceptor {
         if(!StringUtils.isBlank(jwtToken)){
             Claims claims = jsonWebToken.getClaimByToken(jwtToken);
             if(claims instanceof Claims && !jsonWebToken.isTokenExpired(claims.getExpiration())){
+                httpServletRequest.setAttribute("claims" , claims);
                 return true;
             }
         }
-
-        httpServletResponse.sendRedirect("/login.html");
+        httpServletResponse.setStatus(401);
+        //httpServletResponse.sendRedirect("/login.html?backurl="+ UriEscape.escapeUriPath(httpServletRequest.getRequestURL().toString()));
 
         return false;
     }

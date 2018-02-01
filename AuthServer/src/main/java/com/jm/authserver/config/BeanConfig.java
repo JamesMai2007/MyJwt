@@ -15,7 +15,7 @@ public class BeanConfig{
     @Bean(name="jsonWebToken")
     public JsonWebToken jsonWebToken(){
         JsonWebToken jsonWebToken = new JsonWebToken();
-        jsonWebToken.setExpire(this.expire);
+        jsonWebToken.setDefaultExpire(this.expire);
         jsonWebToken.setHeader(this.header);
         jsonWebToken.setSecret(this.secret);
         return jsonWebToken;
